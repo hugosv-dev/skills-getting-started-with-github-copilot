@@ -25,12 +25,22 @@ Uma aplicação FastAPI super simples que permite que estudantes visualizem e se
    - Documentação da API: http://localhost:8000/docs
    - Documentação alternativa: http://localhost:8000/redoc
 
+## Testes
+
+Os testes do backend ficam em `tests/` e usam `pytest`. Na raiz do repositório, execute:
+
+```
+pip install -r requirements.txt
+pytest
+```
+
 ## Endpoints da API
 
 | Método | Endpoint                                                          | Descrição                                                                   |
 | ------ | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Obtém todas as atividades com seus detalhes e contagem atual de participantes |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Inscreve-se em uma atividade                                                |
+| DELETE | `/activities/{activity_name}/unregister?email=student@mergington.edu` | Cancela a inscrição de um estudante em uma atividade                    |
 
 ## Modelo de Dados
 
@@ -48,3 +58,5 @@ A aplicação usa um modelo de dados simples com identificadores significativos:
    - Série/Ano escolar
 
 Todos os dados são armazenados em memória, o que significa que os dados serão resetados quando o servidor reiniciar.
+
+Um estudante não pode se inscrever duas vezes na mesma atividade, nem em uma atividade que já atingiu o número máximo de participantes (a API responde com erro `400`).
